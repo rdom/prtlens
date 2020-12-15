@@ -56,9 +56,9 @@ example:
 root loadlib.C drawHP.C
 
 
-seq 200 5 400 | xargs -n1 -P10 -I{} ../build/prtlens -l 1 -theta 10 -m "2 eV" -e 10000 -s 2 -z {} -b 1 -o hits_{}.root
+seq 200 5 400 | xargs -n1 -P4 -I{} ../build/prtlens -l 1 -theta 10 -m "2 eV" -e 10000 -s 2 -z {} -b 1 -o hits_{}.root
 
-seq 200 5 400 | xargs -n1 -P10 -I{} root -b -q loadlib.C fit_sim.C"(\"hits_{}.root\")"
+seq 200 5 400 | xargs -n1 -P4 -I{} root -b -q loadlib.C fit_sim.C"(\"hits_{}.root\")"
 
 hdd out.root hits*out.root
 
