@@ -1,4 +1,4 @@
-##Synopsis
+## Synopsis
 ```
 prtlens [OPTION] [ARGUMENT] ... [OPTION] [ARGUMENT]
 
@@ -6,7 +6,7 @@ example:
 ./prtlens -l 3 -theta 0 -m "2 eV" -e 100 -s 1 -z 300
 
 ```
-##Options
+## Options
 ```
 
 -o    output file name
@@ -51,7 +51,7 @@ example:
 
 ```
 
-##Example of script usage from macro folder
+## Example of script usage from macro folder
 ```
 root loadlib.C drawHP.C
 
