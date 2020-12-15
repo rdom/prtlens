@@ -1,0 +1,37 @@
+# Use this open statement to create an OpenGL view:
+/vis/open OGL
+
+/vis/viewer/set/autoRefresh false
+/vis/drawVolume
+
+# Specify style (surface or wireframe):
+/vis/viewer/set/style surface
+/vis/viewer/set/hiddenEdge true
+
+# Draw coordinate axes:
+#/vis/scene/add/axes 0 0 0 0.1 m
+
+/vis/scene/add/trajectories smooth
+/vis/modeling/trajectories/create/drawByParticleID
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA opticalphoton 1 0.843 0 0.4
+/vis/modeling/trajectories/drawByParticleID-0/setRGBA e+ 1 0 1 1
+/vis/modeling/trajectories/drawByParticleID-0/default/setDrawStepPts true
+/vis/modeling/trajectories/drawByParticleID-0/default/setStepPtsSize 3.5
+
+# To superimpose all of the events from a given run:
+/vis/scene/endOfEventAction accumulate
+
+# Re-establish auto refreshing and verbosity:
+/vis/viewer/set/autoRefresh true
+
+/vis/geometry/set/forceLineSegmentsPerCircle all 0 100
+/vis/geometry/set/lineWidth all 0 1
+/vis/viewer/set/lightsVector -1 -1 -1
+
+# top
+/vis/viewer/set/viewpointVector 0 1 0
+/vis/viewer/set/upVector 1 0 0
+/vis/viewer/set/projection orthogonal
+/vis/viewer/zoomTo 3
+/vis/viewer/scaleTo 1 1 1
+/vis/viewer/set/targetPoint 0 0 0 cm

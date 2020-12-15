@@ -1,0 +1,4 @@
+/gun/particle opticalphoton
+/gun/energy 3.18 eV
+/gun/position 0 0 -100 cm
+/gun/direction 0 0 1
