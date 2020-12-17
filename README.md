@@ -66,6 +66,13 @@ make -j4
 
 ```
 
+## Example of event display
+```
+./prtlens -g 1 -l 3 -theta 10 -m "3 eV" -e 100 -s 1 -z 300 -b 0
+```
+![alt text](https://github.com/rdom/prtlens/raw/master/pics/example_1.png)
+![alt text](https://github.com/rdom/prtlens/raw/master/pics/example_2.png)
+
 ## Example of script usage from macro folder
 ```
 root loadlib.C drawHP.C
