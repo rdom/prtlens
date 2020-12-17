@@ -51,6 +51,21 @@ example:
 
 ```
 
+## Installation
+```
+Geant4 and root should be installed and initialized.
+
+git clone https://github.com/rdom/prtdirc
+git clone https://github.com/rdom/prtlens
+
+cd prtlens
+mkdir build
+cd build
+cmake ..
+make -j4
+
+```
+
 ## Example of script usage from macro folder
 ```
 root loadlib.C drawHP.C

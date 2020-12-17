@@ -68,7 +68,10 @@ G4VPhysicalVolume* PrtDetectorConstruction::Construct(){
   auto wExpHall  = new G4PVPlacement(0,G4ThreeVector(),lExpHall,"gExpHall",0,false,0);
     
   auto gTank = new G4Box("gTank",0.5*fTank[0],0.5*fTank[1],0.5*fTank[2]);
-  lTank = new G4LogicalVolume(gTank,OilMaterial,"lTank",0,0,0); //OilMaterial
+
+  G4Material* tankMaterial = defaultMaterial; // air
+  if(fGeomId==2) tankMaterial = OilMaterial;
+  lTank = new G4LogicalVolume(gTank,tankMaterial,"lTank",0,0,0);
   new G4PVPlacement(0,G4ThreeVector(),lTank,"wTank",lExpHall,false,0);
     
   // The Lens
@@ -416,8 +419,7 @@ void PrtDetectorConstruction::DefineMaterials(){
 
 
   // assign main materials
-  if(fGeomId == 1) defaultMaterial = Vacuum;
-  else defaultMaterial = Air; //Vacuum // material of world
+  defaultMaterial = Air; //Vacuum // material of world
   frontMaterial = CarbonFiber; 
   BarMaterial = SiO2; // material of all Bars, Quartz and Window
   OilMaterial = KamLandOil; // material of volume 1,2,3,4
