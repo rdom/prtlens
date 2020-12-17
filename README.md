@@ -49,6 +49,8 @@ example:
 -b    batch mode
                1    run silent (without GUI)
 
+tank dimensions etc. can be configured in src/PrtDetectorConstruction.cxx
+
 ```
 
 ## Installation
