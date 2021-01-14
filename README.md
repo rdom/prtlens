@@ -57,7 +57,7 @@ tank dimensions etc. can be configured in src/PrtDetectorConstruction.cxx
 ```
 Geant4 and root should be installed and initialized.
 
-git clone https://github.com/rdom/prtdirc
+git clone https://github.com/rdom/prttools
 git clone https://github.com/rdom/prtlens
 
 cd prtlens
