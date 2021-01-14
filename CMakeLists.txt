@@ -35,7 +35,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/src/*.h)
 # Generate dictionary for root
 ROOT_GENERATE_DICTIONARY(G__Prt PrtHit.h PrtEvent.h PrtLutNode.h LINKDEF src/PrtLinkDef.h MODULE Prt)
 add_library(Prt SHARED src/PrtHit.cxx src/PrtEvent.cxx src/PrtLutNode.cxx G__Prt.cxx)
-#target_link_libraries(Prt ${ROOT_LIBRARIES})
+target_link_libraries(Prt ${ROOT_LIBRARIES} -lSpectrum -lHistPainter)
 
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
@@ -45,7 +45,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -fno-trapping-math -ftree-vectorize -f
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -Wno-maybe-uninitialized -Wno-unused-variable -Wno-unused-parameter -Wno-unused-but-set-variable")
 
 add_executable(prtlens PrtDirc.cxx ${sources})
-target_link_libraries(prtlens -lGLU ${Geant4_LIBRARIES} ${ROOT_LIBRARIES} Prt -lSpectrum -lHistPainter)
+target_link_libraries(prtlens ${Geant4_LIBRARIES} Prt)
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
