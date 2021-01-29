@@ -59,6 +59,7 @@ PrtManager::PrtManager(G4String outfile, G4int runtype){
   fLStepX=0;
   fLStepY=0;
   fBeamX=0;
+  fBeamY=0;
   fBeamZ=-1;
   fTime=0;
   fTimeRes=0.2;
@@ -101,6 +102,7 @@ void PrtManager::AddEvent(PrtEvent event){
     fEvent->SetPrismStepX(fPrismStepX);
     fEvent->SetPrismStepY(fPrismStepY);
     fEvent->SetBeamX(fBeamX);
+    fEvent->SetBeamY(fBeamY);
     fEvent->SetBeamZ(fBeamZ);
     fEvent->SetTimeRes(fTimeRes);
     fEvent->SetTime(fTime);

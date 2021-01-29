@@ -29,10 +29,12 @@ void PrtPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent){
   PrtManager::Instance()->AddEvent(PrtEvent());
   double sigma = PrtManager::Instance()->GetBeamDinsion();
   double events = PrtManager::Instance()->GetEvents();
+  double beamx = PrtManager::Instance()->GetBeamX();
+  double beamy = PrtManager::Instance()->GetBeamY();
   
   for(int i=0; i<events; i++){
-    double x = G4RandGauss::shoot(0,sigma);
-    double y = G4RandGauss::shoot(0,sigma);
+    double x = G4RandGauss::shoot(beamx,sigma);
+    double y = G4RandGauss::shoot(beamy,sigma);
     fParticleGun->SetParticlePosition(G4ThreeVector(x, y,-200));
     fParticleGun->GeneratePrimaryVertex(anEvent);
   }

@@ -47,10 +47,12 @@ int main(int argc,char** argv)
   TApplication theApp("App", 0, 0);
 
   G4String macro,radiator, physlist,session,testVal1,testVal2,testVal3,
-    prismStepX,prismStepY,beamX,timeRes,lutfile,mcpLayout
+    prismStepX,prismStepY,timeRes,lutfile,mcpLayout
     ,geometry("1")
     ,outfile("focalplane.root")
     ,beamZ("200")
+    ,beamX("0")
+    ,beamY("0")
     ,beamDimension("1")
     ,lensId("3")
     ,particle("opticalphoton")
@@ -73,6 +75,8 @@ int main(int argc,char** argv)
 
     else if ( G4String(argv[i]) == "-p" ) particle  = argv[i+1];
     else if ( G4String(argv[i]) == "-m" ) momentum  = argv[i+1];
+    else if ( G4String(argv[i]) == "-beamx" ) beamX  = argv[i+1];
+    else if ( G4String(argv[i]) == "-beamy" ) beamY  = argv[i+1];
     else if ( G4String(argv[i]) == "-s" ) beamDimension  = argv[i+1];
     else if ( G4String(argv[i]) == "-e" ) events    = atoi(argv[i+1]);
 
@@ -91,7 +95,6 @@ int main(int argc,char** argv)
     else if ( G4String(argv[i]) == "-t3" ) testVal3   = argv[i+1];
     else if ( G4String(argv[i]) == "-gsx" ) prismStepX   = argv[i+1];
     else if ( G4String(argv[i]) == "-gsy" ) prismStepY   = argv[i+1];
-    else if ( G4String(argv[i]) == "-gx" ) beamX    = argv[i+1];
     else if ( G4String(argv[i]) == "-tr" ) timeRes  = argv[i+1];
     else if ( G4String(argv[i]) == "-v" ) verbose   = atoi(argv[i+1]);
 #ifdef G4MULTITHREADED
@@ -127,6 +130,7 @@ int main(int argc,char** argv)
   if(prismStepX.size())   PrtManager::Instance()->SetPrismStepX(atof(prismStepX));
   if(prismStepY.size())   PrtManager::Instance()->SetPrismStepY(atof(prismStepY));
   if(beamX.size())   PrtManager::Instance()->SetBeamX(atof(beamX));
+  if(beamY.size())   PrtManager::Instance()->SetBeamY(atof(beamY));
   if(beamZ.size())   PrtManager::Instance()->SetBeamZ(atof(beamZ));
   if(timeRes.size())   PrtManager::Instance()->SetTimeRes(atof(timeRes));
 

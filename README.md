@@ -19,8 +19,15 @@ example:
 -z   z position of the photodetection plane [mm]
                 200 (default)
 
+-beamx    x shift for the laser beam position [mm]
+                0 (default)
+
+-beamy    y shift for the laser beam position [mm]
+                0 (default)
+
 -s    Gaussian smearing of the laser beam (sigma) [mm]
                 1 (default)
+		
 
 -l    focusing system
                 0    no lens

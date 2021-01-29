@@ -46,6 +46,7 @@ public:
   Double_t GetPrismStepX(){ return fPrismStepX; }
   Double_t GetPrismStepY(){ return fPrismStepY; }
   Double_t GetBeamX(){ return fBeamX; }
+  Double_t GetBeamY(){ return fBeamY; }
   Double_t GetBeamZ(){ return fBeamZ; }
   Double_t GetTimeRes(){ return fTimeRes; }
   TString  GetInfo() { return fInfo; }
@@ -70,6 +71,7 @@ public:
   void SetPrismStepX(Double_t val){ fPrismStepX = val; }
   void SetPrismStepY(Double_t val){ fPrismStepY = val; }
   void SetBeamX(Double_t val){ fBeamX = val; }
+  void SetBeamY(Double_t val){ fBeamY = val; }
   void SetBeamZ(Double_t val){ fBeamZ = val; }
   void SetTimeRes(Double_t val){ fTimeRes = val; }
   void SetInfo(TString val){ fInfo = val; }
@@ -97,10 +99,11 @@ private:
   Double_t fPrismStepX;
   Double_t fPrismStepY;
   Double_t fBeamX;
+  Double_t fBeamY;
   Double_t fBeamZ;
   Double_t fTimeRes;
   TString  fInfo;
   
-  ClassDef(PrtEvent, 5);
+  ClassDef(PrtEvent, 6);
 };
 #endif
