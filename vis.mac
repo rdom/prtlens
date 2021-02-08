@@ -35,3 +35,8 @@
 /vis/viewer/zoomTo 3
 /vis/viewer/scaleTo 1 1 1
 /vis/viewer/set/targetPoint 0 0 0 cm
+
+/vis/filtering/trajectories/create/attributeFilter
+/vis/filtering/trajectories/attributeFilter-0/setAttribute FVPath
+/vis/filtering/trajectories/attributeFilter-0/addValue gExpHall:0/wPixel:0
+/vis/filtering/trajectories/attributeFilter-0/addValue gExpHall:0/wTank:0/wPixel:0
