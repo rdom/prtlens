@@ -358,8 +358,9 @@ G4VPhysicalVolume* PrtDetectorConstruction::Construct(){
 
   auto gPixel = new G4Box("gPixel",100,100,1);
   lPixel = new G4LogicalVolume(gPixel,BarMaterial,"lPixel",0,0,0);
-  new G4PVPlacement(0,G4ThreeVector(0,0,fPixelZ),lPixel,"wPixel", lExpHall,false,0); 
-
+  if(fPixelZ < 0.5*fTank[2]) new G4PVPlacement(0,G4ThreeVector(0,0,fPixelZ),lPixel,"wPixel", lTank,false,0); 
+  else new G4PVPlacement(0,G4ThreeVector(0,0,fPixelZ),lPixel,"wPixel", lExpHall,false,0);
+  
   SetVisualization();
 
   return wExpHall;
