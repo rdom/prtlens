@@ -40,8 +40,7 @@ target_link_libraries(Prt ${ROOT_LIBRARIES} -lSpectrum -lHistPainter)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG -fno-trapping-math -ftree-vectorize -fno-math-errno -std=gnu++11")
-
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -Wno-maybe-uninitialized -Wno-unused-variable -Wno-unused-parameter -Wno-unused-but-set-variable")
 
 add_executable(prtlens PrtDirc.cxx ${sources})
