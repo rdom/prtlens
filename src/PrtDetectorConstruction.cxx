@@ -348,6 +348,35 @@ G4VPhysicalVolume* PrtDetectorConstruction::Construct(){
     lLens3 = new G4LogicalVolume(gLens3,BarMaterial,"lLens3",0,0,0);
   }
 
+  if (fLensId == 9) { // TL ACR spherical lens
+
+    double r1 = 50.08;
+    double r2 = 41.7;
+    double r3 = 247.7;
+    double diameter = 50.8;
+    double ht = 0.5*23;
+
+    double lensMinThikness = 2;
+
+    G4Tubs *gtub = new G4Tubs("tub", 0, 0.5 * diameter, 50, 0. * deg, 360. * deg);
+    G4Sphere *gsphere1 = new G4Sphere("sphere1", 0, r1, 0, 360 * deg, 0, 360 * deg);
+    G4Sphere *gsphere2 = new G4Sphere("sphere2", 0, r2, 0, 360 * deg, 0, 360 * deg);
+    G4Sphere *gsphere3 = new G4Sphere("sphere3", 0, r3, 0, 360 * deg, 0, 360 * deg);
+    auto r = new G4RotationMatrix();
+
+    G4ThreeVector zTrans1(0, 0, r1 -ht + 3);
+    G4ThreeVector zTrans2(0, 0, -r2 + ht );
+    G4ThreeVector zTrans3(0, 0, -r3 + ht + 3);
+    
+    auto gLens01 = new G4IntersectionSolid("p01", gtub, gsphere2, r, zTrans2);
+    auto gLens1 = new G4IntersectionSolid("p1", gLens01, gsphere1, r, zTrans1);
+    auto gLens02 = new G4SubtractionSolid("p02", gtub, gsphere2, r, zTrans2);
+    auto gLens2 = new G4IntersectionSolid("p2", gLens02, gsphere3, r, zTrans3);
+
+    lLens1 = new G4LogicalVolume(gLens1, Nlak33aMaterial, "lLens1", 0, 0, 0);
+    lLens2 = new G4LogicalVolume(gLens2, BarMaterial, "lLens2", 0, 0, 0);
+  }
+
   fRotAngle = PrtManager::Instance()->GetAngle()*deg; 
   fPrtRot->rotateY(fRotAngle);
   fPrtRot->rotateX(PrtManager::Instance()->GetPhi()*deg);

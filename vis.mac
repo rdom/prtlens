@@ -9,7 +9,7 @@
 /vis/viewer/set/hiddenEdge true
 
 # Draw coordinate axes:
-#/vis/scene/add/axes 0 0 0 0.1 m
+# /vis/scene/add/axes 0 0 0 0.023 m
 
 /vis/scene/add/trajectories smooth
 /vis/modeling/trajectories/create/drawByParticleID
