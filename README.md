@@ -36,7 +36,8 @@ example:
                 3    3-layer spherical lens (default)
                 4    1-layer spherical lens (with air-gap)
                 5    test lens
-                6    3-layer cylindrical lens		
+                6    3-layer cylindrical lens
+		9    2-layer sperical achromat lens
                 10   ideal lens (thickness = 0, ideal focusing)
 
 -theta    polar angle between particle beam and bar radiator [deg]
