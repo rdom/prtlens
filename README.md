@@ -13,8 +13,8 @@ example:
       focalplane.root (default)
 
 -g    geometry configuration
-                1    tank with air
-                2    tank with oil (default)
+                1    tank with air (default)
+                2    tank with oil
 
 -z   z position of the photodetection plane [mm]
                 200 (default)

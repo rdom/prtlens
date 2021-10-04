@@ -31,7 +31,7 @@ void PrtPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent){
   double events = PrtManager::Instance()->GetEvents();
   double beamx = PrtManager::Instance()->GetBeamX();
   double beamy = PrtManager::Instance()->GetBeamY();
-  
+
   for(int i=0; i<events; i++){
     double x = G4RandGauss::shoot(beamx,sigma);
     double y = G4RandGauss::shoot(beamy,sigma);

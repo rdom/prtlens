@@ -37,7 +37,7 @@ PrtDetectorConstruction::PrtDetectorConstruction()
   fLensId = PrtManager::Instance()->GetLens();
   fPixelZ = PrtManager::Instance()->GetBeamZ();
   
-  fTank[0] = 200; fTank[1] = 200, fTank[2] = 300;
+  fTank[0] = 200; fTank[1] = 200, fTank[2] = 1300;
   
   fLens[0] = fLens[1] = 40; fLens[2]=10;
   if(fLensId == 2){
