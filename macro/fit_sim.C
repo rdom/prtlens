@@ -4,7 +4,7 @@
 #include "../../prttools/datainfo.C"
 #include "../../prttools/prttools.C"
 
-void fit_sim(TString infile="../build/focalplane.root",TString out = ""){
+void fit_sim(TString infile="../build/focalplane.root", bool batch = 0){
 
   double p,px,py,gx,gy,z,x,theta;
   TTree *t = new TTree("data","data");
@@ -20,7 +20,7 @@ void fit_sim(TString infile="../build/focalplane.root",TString out = ""){
   
   TH2F *h = new TH2F("h",";x [mm];y [mm]",200,-5,5,200,-5,5);
   TH1F *hx = new TH1F("hx","x [mm]",200,-5,5);
-  TH1F *hy = new TH1F("hx","y [mm]",200,-5,5);
+  TH1F *hy = new TH1F("hy","y [mm]",200,-5,5);
     
   TVector3 pos;
   
@@ -41,18 +41,20 @@ void fit_sim(TString infile="../build/focalplane.root",TString out = ""){
   TFitResultPtr ry = hy->Fit("gaus","S");
   gy = ry->Parameter(2);
 
-  infile.ReplaceAll(".root","_out.root");
-  TFile f(infile,"recreate");
-  t->Fill();  
+  infile.ReplaceAll(".root", "_out.root");
+  TFile f(infile, "recreate");
+  t->Fill();
   t->Write();
-  f.Close();  
-
-  TString nid = Form("pos_%2.1f",z);
-  prt_canvasAdd(nid,500,500);
-  h->Draw("colz");
-  prt_canvasAdd(nid+"_x",500,500);
-  hx->Draw("colz");
-  prt_canvasAdd(nid+"_y",500,500);
-  hy->Draw("colz");
-  prt_canvasSave("data/fit_sim",0);
+  f.Close();
+  
+  if (!batch) {
+    TString nid = Form("pos_%2.1f", z);
+    prt_canvasAdd(nid, 500, 500);
+    h->Draw("colz");
+    prt_canvasAdd(nid + "_x", 500, 500);
+    hx->Draw("colz");
+    prt_canvasAdd(nid + "_y", 500, 500);
+    hy->Draw("colz");
+    prt_canvasSave("data/fit_sim", 0);
+  }
 }

@@ -27,7 +27,8 @@ PrtPrimaryGeneratorAction::~PrtPrimaryGeneratorAction(){
 void PrtPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent){
 
   PrtManager::Instance()->AddEvent(PrtEvent());
-  double sigma = PrtManager::Instance()->GetBeamDinsion();
+  double sigma = PrtManager::Instance()->GetBeamDimension();
+  double divergence = PrtManager::Instance()->GetBeamDivergence();
   double events = PrtManager::Instance()->GetEvents();
   double beamx = PrtManager::Instance()->GetBeamX();
   double beamy = PrtManager::Instance()->GetBeamY();
@@ -35,13 +36,20 @@ void PrtPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent){
   for(int i=0; i<events; i++){
     double x = G4RandGauss::shoot(beamx,sigma);
     double y = G4RandGauss::shoot(beamy,sigma);
+    G4ThreeVector dir = G4ThreeVector(0,0,1); //fParticleGun->GetParticleMomentumDirection();
+
+    dir *= fParticleGun->GetParticleMomentum();
+    dir.setTheta(G4RandGauss::shoot(0, divergence)); // beam divergence
+    dir.setPhi(2 * M_PI * G4UniformRand());
+
     fParticleGun->SetParticlePosition(G4ThreeVector(x, y,-200));
+    fParticleGun->SetParticleMomentumDirection(dir);
     fParticleGun->GeneratePrimaryVertex(anEvent);
+
   }
-  
-  G4ThreeVector dir = fParticleGun->GetParticleMomentumDirection();
-  dir *= fParticleGun->GetParticleMomentum();
+  G4ThreeVector dir = G4ThreeVector(0,0,1);
   PrtManager::Instance()->SetMomentum(TVector3(dir.x(),dir.y(),dir.z()));
+
 }
 
 void PrtPrimaryGeneratorAction::SetOptPhotonPolar(){

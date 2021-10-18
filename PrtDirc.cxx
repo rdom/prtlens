@@ -54,6 +54,7 @@ int main(int argc,char** argv)
     ,beamX("0")
     ,beamY("0")
     ,beamDimension("1")
+    ,beamDivergence("0")
     ,lensId("3")
     ,particle("opticalphoton")
     ,geomAng("0")
@@ -78,6 +79,7 @@ int main(int argc,char** argv)
     else if ( G4String(argv[i]) == "-beamx" ) beamX  = argv[i+1];
     else if ( G4String(argv[i]) == "-beamy" ) beamY  = argv[i+1];
     else if ( G4String(argv[i]) == "-s" ) beamDimension  = argv[i+1];
+    else if ( G4String(argv[i]) == "-d" ) beamDivergence  = argv[i+1];
     else if ( G4String(argv[i]) == "-e" ) events    = atoi(argv[i+1]);
 
     else if ( G4String(argv[i]) == "-z" ) beamZ    = argv[i+1];
@@ -121,6 +123,7 @@ int main(int argc,char** argv)
   if(lensId.size())   PrtManager::Instance()->SetLens(atoi(lensId));
   if(mcpLayout.size())PrtManager::Instance()->SetMcpLayout(atoi(mcpLayout));
   if(beamDimension.size())   PrtManager::Instance()->SetBeamDimension(atof(beamDimension));
+  if(beamDivergence.size())   PrtManager::Instance()->SetBeamDivergence(atof(beamDivergence));
   if(testVal1.size())   PrtManager::Instance()->SetShift(atof(testVal1));
   if(testVal1.size())   PrtManager::Instance()->SetTest1(atof(testVal1));
   if(testVal2.size())   PrtManager::Instance()->SetTest2(atof(testVal2));

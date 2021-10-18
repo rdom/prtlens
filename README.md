@@ -27,8 +27,10 @@ example:
 
 -s    Gaussian smearing of the laser beam (sigma) [mm]
                 1 (default)
-		
 
+-d    Divergence of the laser beam [rad]
+                0 (default)
+		
 -l    focusing system
                 0    no lens
                 1    2-layer spherical lens
