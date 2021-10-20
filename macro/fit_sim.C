@@ -18,9 +18,9 @@ void fit_sim(TString infile="../build/focalplane.root", bool batch = 0){
   
   if(!prt_init(infile,1)) return;
   
-  TH2F *h = new TH2F("h",";x [mm];y [mm]",200,-5,5,200,-5,5);
-  TH1F *hx = new TH1F("hx","x [mm]",200,-5,5);
-  TH1F *hy = new TH1F("hy","y [mm]",200,-5,5);
+  TH2F *h = new TH2F("h",";x [mm];y [mm]",200,-20,20,200,-20,20);
+  TH1F *hx = new TH1F("hx","x [mm]",2000,-20,20);
+  TH1F *hy = new TH1F("hy","y [mm]",2000,-20,20);
     
   TVector3 pos;
   
@@ -36,10 +36,20 @@ void fit_sim(TString infile="../build/focalplane.root", bool batch = 0){
     }
   }
 
-  TFitResultPtr rx = hx->Fit("gaus","S");
+  double mx = hx->GetMean();
+  double my = hy->GetMean();
+  double sx = hx->GetStdDev();
+  double sy = hy->GetStdDev();
+
+  px = hx->GetMean();
+  py = hy->GetMean();
+
+  TFitResultPtr rx = hx->Fit("gaus", "SL", "", mx - 2 * sx, mx + 2 * sx);
   gx = rx->Parameter(2);
-  TFitResultPtr ry = hy->Fit("gaus","S");
+  TFitResultPtr ry = hy->Fit("gaus", "SL", "", my - 2 * sy, my + 2 * sy);
   gy = ry->Parameter(2);
+  
+  std::cout << "px " << px << " gx " << gx << " py " << py << " gy " << gy << std::endl;
 
   infile.ReplaceAll(".root", "_out.root");
   TFile f(infile, "recreate");
