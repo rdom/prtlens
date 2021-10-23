@@ -19,8 +19,8 @@ void fit_sim(TString infile="../build/focalplane.root", bool batch = 0){
   if(!prt_init(infile,1)) return;
   
   TH2F *h = new TH2F("h",";x [mm];y [mm]",200,-10,10,200,-5,5);
-  TH1F *hx = new TH1F("hx","x [mm]",2000,-40,40);
-  TH1F *hy = new TH1F("hy","y [mm]",2000,-40,40);
+  TH1F *hx = new TH1F("hx","x [mm]",3000,-40,40);
+  TH1F *hy = new TH1F("hy","y [mm]",3000,-40,40);
     
   TVector3 pos;
   
@@ -44,11 +44,28 @@ void fit_sim(TString infile="../build/focalplane.root", bool batch = 0){
   px = hx->GetMean();
   py = hy->GetMean();
 
-  TFitResultPtr rx = hx->Fit("gaus", "SL", "", mx - 2 * sx, mx + 2 * sx);
+ 
+  double xmax = hx->GetXaxis()->GetBinCenter(hx->GetMaximumBin());
+  int threshold = hx->GetMaximum() * 0.4;
+  int firstbin = hx->FindFirstBinAbove(threshold);
+  int lastbin = hx->FindLastBinAbove(threshold);
+  double xf = hx->GetXaxis()->GetBinCenter(firstbin);
+  double xl = hx->GetXaxis()->GetBinCenter(lastbin);
+  px = xl - xf;  
+
+  double ymax = hy->GetXaxis()->GetBinCenter(hy->GetMaximumBin());
+  threshold = hy->GetMaximum() * 0.4;
+  firstbin = hy->FindFirstBinAbove(threshold);
+  lastbin = hy->FindLastBinAbove(threshold);
+  double yf = hy->GetXaxis()->GetBinCenter(firstbin);
+  double yl = hy->GetXaxis()->GetBinCenter(lastbin);
+  py = yl - yf;
+
+  TFitResultPtr rx = hx->Fit("gaus", "SL", "", xmax - px, xmax + px);
   gx = rx->Parameter(2);
-  TFitResultPtr ry = hy->Fit("gaus", "SL", "", my - 2 * sy, my + 2 * sy);
+  TFitResultPtr ry = hy->Fit("gaus", "SL", "", ymax - py, ymax + py);
   gy = ry->Parameter(2);
-  
+
   std::cout << "px " << px << " gx " << gx << " py " << py << " gy " << gy << std::endl;
 
   infile.ReplaceAll(".root", "_out.root");

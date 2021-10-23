@@ -385,7 +385,6 @@ G4VPhysicalVolume* PrtDetectorConstruction::Construct(){
   fPrtRot->rotateX(PrtManager::Instance()->GetPhi()*deg);
 
   G4AssemblyVolume* aLens = new G4AssemblyVolume(); 
-
   G4RotationMatrix* rr = new G4RotationMatrix();
   G4ThreeVector tt = G4ThreeVector(0, 0, 0.5 * fLens[2]);
   G4ThreeVector tg = G4ThreeVector(0, 0, 0.0);
