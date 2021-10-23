@@ -23,6 +23,9 @@
 #include "G4RunManager.hh"
 #include "G4Colour.hh"
 #include "G4VisAttributes.hh"
+#include "G4AssemblyVolume.hh"
+#include "G4Transform3D.hh"
+
 
 #include "PrtManager.h"
 #include "PrtTriggerSD.h"
@@ -378,12 +381,22 @@ G4VPhysicalVolume* PrtDetectorConstruction::Construct(){
   }
 
   fRotAngle = PrtManager::Instance()->GetAngle()*deg; 
-  fPrtRot->rotateY(fRotAngle);
+  fPrtRot->rotateY(-fRotAngle);
   fPrtRot->rotateX(PrtManager::Instance()->GetPhi()*deg);
 
-  new G4PVPlacement(fPrtRot,G4ThreeVector(0,0,0.5*fLens[2]),lLens1,"wLens1", lTank,false,0);
-  if(fLensId != 4) new G4PVPlacement(fPrtRot,G4ThreeVector(0,0,0.5*fLens[2]),lLens2,"wLens2", lTank,false,0);
-  if(fLensId == 3 || fLensId==6 || fLensId==7 || fLensId==8)  new G4PVPlacement(fPrtRot,G4ThreeVector(0,0,0.5*fLens[2]),lLens3,"wLens3", lTank,false,0);
+  G4AssemblyVolume* aLens = new G4AssemblyVolume(); 
+
+  G4RotationMatrix* rr = new G4RotationMatrix();
+  G4ThreeVector tt = G4ThreeVector(0, 0, 0.5 * fLens[2]);
+  G4ThreeVector tg = G4ThreeVector(0, 0, 0.0);
+  aLens->AddPlacedVolume(lLens1, tt, rr);
+  if (fLensId != 4) aLens->AddPlacedVolume(lLens2, tt, rr);
+  if (fLensId == 3 || fLensId == 6 || fLensId == 7 || fLensId == 8) aLens->AddPlacedVolume(lLens3, tt, rr);
+  aLens->MakeImprint(lTank, tg, fPrtRot);
+
+  // new G4PVPlacement(fPrtRot,G4ThreeVector(0,0,0.5*fLens[2]),lLens1,"wLens1", lTank,false,0);
+  // if(fLensId != 4) new G4PVPlacement(fPrtRot,G4ThreeVector(0,0,0.5*fLens[2]),lLens2,"wLens2", lTank,false,0);
+  // if(fLensId == 3 || fLensId==6 || fLensId==7 || fLensId==8)  new G4PVPlacement(fPrtRot,G4ThreeVector(0,0,0.5*fLens[2]),lLens3,"wLens3", lTank,false,0);
 
   auto gPixel = new G4Box("gPixel",100,100,1);
   lPixel = new G4LogicalVolume(gPixel,BarMaterial,"lPixel",0,0,0);

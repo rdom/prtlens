@@ -18,9 +18,9 @@ void fit_sim(TString infile="../build/focalplane.root", bool batch = 0){
   
   if(!prt_init(infile,1)) return;
   
-  TH2F *h = new TH2F("h",";x [mm];y [mm]",200,-20,20,200,-20,20);
-  TH1F *hx = new TH1F("hx","x [mm]",2000,-20,20);
-  TH1F *hy = new TH1F("hy","y [mm]",2000,-20,20);
+  TH2F *h = new TH2F("h",";x [mm];y [mm]",200,-10,10,200,-5,5);
+  TH1F *hx = new TH1F("hx","x [mm]",2000,-40,40);
+  TH1F *hy = new TH1F("hy","y [mm]",2000,-40,40);
     
   TVector3 pos;
   
@@ -59,11 +59,11 @@ void fit_sim(TString infile="../build/focalplane.root", bool batch = 0){
   
   if (!batch) {
     TString nid = Form("pos_%2.1f", z);
-    prt_canvasAdd(nid, 500, 500);
+    prt_canvasAdd(nid, 1600, 800);
     h->Draw("colz");
-    prt_canvasAdd(nid + "_x", 500, 500);
+    prt_canvasAdd(nid + "_x", 1600, 800);
     hx->Draw("colz");
-    prt_canvasAdd(nid + "_y", 500, 500);
+    prt_canvasAdd(nid + "_y", 1600, 800);
     hy->Draw("colz");
     prt_canvasSave("data/fit_sim", 0);
   }
